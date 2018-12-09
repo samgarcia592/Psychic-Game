@@ -1,0 +1,80 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Psychic Game</title>
+</head>
+<body>
+
+<!-- 
+I need the computer to make a choice 
+User to make a choice 
+Capture those choices 
+compare these choices, and determine a win or loss 
+display the result to the user  -->
+
+<div id="game">
+    <h1>The Psychic Game</h1>
+    <h2>Guess what letter I'm thinking of</h2>
+    <p id = "userguess"></p>
+</div>
+
+<script type = "text/javascript"> 
+
+var options = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; 
+var wins = 0; 
+var losses = 0; 
+var guesses = []; 
+var guessesLeft = 10; 
+var i; 
+
+
+   var computerGuess = options[Math.floor(Math.random()*options.length)]; 
+    console.log(computerGuess); 
+
+    document.onkeyup = function () {
+        var userguess = String.fromCharCode(event.keyCode).toLowerCase(); 
+        console.log(userguess);
+        guesses.push(" " + userguess); 
+
+        if (userguess =='a' || userguess =='b' || userguess == 'c' || userguess =='d' || userguess =='e' || userguess == 'f' || userguess =='g' || userguess == 'h' || userguess =='i' || userguess =='j' || userguess == 'k' || userguess =='l' || userguess == 'm' || userguess =='n' || userguess =='o' || userguess == 'p' || userguess =='q' || userguess == 'r' || userguess =='s' || userguess =='t' || userguess == 'u' || userguess =='v' || userguess == 'w' || userguess =='x' || userguess =='y' || userguess == 'z') {
+            
+            guessesLeft--; 
+
+            if (userguess == computerGuess) {
+                wins++; 
+                guessesLeft = 10; 
+                guesses = [];
+                computerGuess = options[Math.floor(Math.random()*options.length)]; 
+                console.log(computerGuess);             
+            }
+
+        }    
+            else {
+            alert("oops! please select a letter"); 
+            }
+        
+            if (guessesLeft == 0) {
+                losses++;
+                guessesLeft = 10; 
+                guesses = []; 
+                computerGuess = options[Math.floor(Math.random()*options.length)]; 
+                console.log(computerGuess);
+            }
+
+        var html = " <h1>The Psychic Game</h1>" + 
+                   "<h2>Guess what letter I'm thinking of</h2>" +
+                   "<p>Wins: " + wins + "</p>" + 
+                   "<p>Losses: " + losses + "</p>" +
+                   "<p>Guesses Left: " + guessesLeft + "</p>" +
+                   "<p>Your Guesses so far: " + guesses + "</p>"; 
+
+        document.querySelector('#game').innerHTML = html; 
+
+    }
+
+
+</script> 
+
+</body>
+</html>
